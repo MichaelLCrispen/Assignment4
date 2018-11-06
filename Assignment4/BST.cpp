@@ -9,9 +9,11 @@ BST::BST()
 }
 
 
-void BST::Insert(int key)
+void BST::Insert(NodePtr Item)
 {
-	if()
+	if ()
+
+		return;
 }
 
 

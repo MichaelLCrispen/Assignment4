@@ -15,7 +15,7 @@ private:
 
 public:
 	BST();
-	void Insert(int key);
+	void Insert(NodePtr item);
 	void InorderTraverse(NodePtr node);
 
 	/*
