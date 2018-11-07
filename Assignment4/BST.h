@@ -1,39 +1,27 @@
-#pragma once
-
 #ifndef BST_H
 #define BST_H
 
+#include "NodeT.cpp"
 
-class BST
-{
-
-private:
-	typedef int ItemType;
-	struct NodeType;
-	typedef NodeType* NodePtr;
-
+class BST {
 
 public:
 	BST();
-	void Insert(NodePtr item);
+	~BST();
 	void InorderTraverse(NodePtr node);
+	void Insert(int item);
+	NodePtr Search(NodePtr x, int item);
 
-	/*
-	void Search(int key);
-	void FindPredecessor(Item);
-	void FindSucessor(Item);
-	*/
+	void FindPredecessor(int item);
+	void FindSucessor(int item);
+	void Delete(int item);  //Bonus Points for Transpose helper function
 	
+	NodePtr ReturnRoot();
 	
 
 private:
-	NodePtr root;
-
-	struct NodeType {
-		int key;
-		NodePtr left, right;
-	};
-
+	Node *root;
+	
 
 };
 
