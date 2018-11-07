@@ -9,7 +9,7 @@ BST::BST()
 }
 
 BST::~BST() {
-
+	DestroyTree(root);
 }
 
 
@@ -65,12 +65,27 @@ NodePtr BST::Search(NodePtr x, int item){
 		return Search(x->right, item);
 }
 
-void BST::FindPredecessor(int item){
+
+NodePtr BST::FindSucessor(int item) {
+	NodePtr x = Search(root, item);
+
+	if (x == NULL)
+		return NULL;
+
+	if (x->right != NULL)
+		return FindMin(x->right);
+
+	NodePtr y = x->parent;
+	while (y != NULL && x == y->right) {
+		x = y;
+		y = y->parent;
+	}
+	return y;
 
 }
 
-void BST::FindSucessor(int item){
-
+NodePtr BST::FindPredecessor(int item){
+	return NULL;
 }
 
 void BST::Delete(int item) {
@@ -82,3 +97,20 @@ NodePtr BST::ReturnRoot() {
 	return root;
 }
 
+
+NodePtr BST::FindMin(NodePtr node) {
+	NodePtr current = node;
+
+	while (current->left != NULL)
+		current = current->left;
+	return current;
+}
+
+void BST::DestroyTree(NodePtr node) {
+	
+	if (node != NULL){
+		DestroyTree(node->left);
+		DestroyTree(node->right);
+		delete node;
+	}
+}

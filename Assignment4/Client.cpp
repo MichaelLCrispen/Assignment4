@@ -1,6 +1,7 @@
 #include<iostream>
 #include<random>
 #include<time.h>
+#include <vld.h>
 #include"BST.h"
 
 using namespace std;
