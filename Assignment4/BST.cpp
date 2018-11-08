@@ -5,11 +5,29 @@
 
 BST::BST()
 {
-	root = nullptr;
+	root = NULL;
+	length = 0;
 }
 
 BST::~BST() {
-	DestroyTree(root);
+	BurnForest(root);
+	root = NULL;
+}
+
+BST::BST(const BST & otherBST) {
+	root = NULL;
+	length = 0;
+	CreateTree(otherBST.root);
+
+	return;
+}
+
+const BST& BST::operator=(const BST & otherBST) {
+	root = NULL;
+	length = 0;
+	CreateTree(otherBST.root);
+
+	return *this;
 }
 
 
@@ -37,6 +55,7 @@ void BST::Insert(int Item){
 	else
 		y->right = temp;
 		
+	length++;
 	return;
 }
 
@@ -56,13 +75,26 @@ void BST::InorderTraverse(NodePtr node) {
 
 NodePtr BST::Search(NodePtr x, int item){
 
-	if( (x == NULL) || (root->key == item)) {
+	if( (x == NULL) || (x->key == item)) {
 		return x;
 	}
 	if (item < x->key)
 		return Search(x->left, item);
 	else
 		return Search(x->right, item);
+}
+
+NodePtr BST::NumComparisons(NodePtr x, int item, int& numComparisons) {
+	
+	numComparisons++;
+
+	if ((x == NULL) || (x->key == item)) {
+		return x;
+	}
+	if (item < x->key)
+		return NumComparisons(x->left, item, numComparisons);
+	else
+		return NumComparisons(x->right, item, numComparisons);
 }
 
 
@@ -85,11 +117,20 @@ NodePtr BST::FindSucessor(int item) {
 }
 
 NodePtr BST::FindPredecessor(int item){
-	return NULL;
-}
+	NodePtr x = Search(root, item);
 
-void BST::Delete(int item) {
+	if (x == NULL)
+		return NULL;
 
+	if (x->left != NULL)
+		return FindMax(x->left);
+
+	NodePtr y = x->parent;
+	while (y != NULL && x == y->right) {
+		x = y;
+		y = y->parent;
+	}
+	return y;
 }
 
 
@@ -106,11 +147,38 @@ NodePtr BST::FindMin(NodePtr node) {
 	return current;
 }
 
-void BST::DestroyTree(NodePtr node) {
+NodePtr BST::FindMax(NodePtr node) {
+	NodePtr current = node;
+
+	while (current->right != NULL)
+		current = current->right;
+	return current;
+}
+
+void BST::BurnForest(NodePtr node) {
 	
 	if (node != NULL){
-		DestroyTree(node->left);
-		DestroyTree(node->right);
+		BurnForest(node->left);
+		BurnForest(node->right);
 		delete node;
 	}
+}
+
+
+void BST::CreateTree(NodePtr node) {
+
+	if (node != NULL) {
+		Insert(node -> key);
+		CreateTree(node->left);
+		CreateTree(node->right);
+	}
+
+	return;
+}
+
+int BST::ValueofNode(NodePtr node) {
+	if(node)
+	return node->key;
+
+	return -1;
 }
