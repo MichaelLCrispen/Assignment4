@@ -90,7 +90,7 @@ int main(){
 	int arrRandomNums[250];
 	CreateListRandomInts(arrRandomNums);
 
-	/*
+	
 	//BST Trials
 	BST fifty = CreateTree(50, arrRandomNums);
 	BST onefifty = CreateTree(150, arrRandomNums);
@@ -100,7 +100,7 @@ int main(){
 	BSTTrial(onefifty);
 	BSTTrial(twofifty);
 	
-	*/
+	
 
 	//Hash Table Trials
 	HashTable hfifty = CreateHashTable(50, arrRandomNums);
