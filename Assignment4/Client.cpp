@@ -3,6 +3,7 @@
 #include<time.h>
 #include <vld.h>
 #include"BST.h"
+#include"HashTable.h"
 
 using namespace std;
 
@@ -11,19 +12,37 @@ void CreateListRandomInts(int arrRandomNums[]);
 BST CreateTree(int length, int arrRandomNums[]);
 void BSTTrial(BST tree);
 
+HashTable CreateHashTable(int length, int temp[]);
+HashTable CreateSortedHashTable(int length, int temp[]);
+void HashTableTrial(HashTable table);
+void SortedHashTableTrial(HashTable table);
+
+//BinarySearchTreeTests
 void TestInsert(int temp[]);
 void CreateTestArray(int temp[]);
-BST CreateTestBST(int temp[]);
 void testPass(BST test);
 void testSearch(BST test);
 void testSuccPre(BST test);
 
+BST CreateTestBST(int temp[]);
+
+//Hash Table Tests
+void HTestInsert(int temp[]);
+void HTestPass(HashTable test);
+void HtestSearch(HashTable test);
+
+
 int main(){
 	
-	/*This block is for testing purposes only
+	/*This block is for testing purposes only*/
+	
+	//int testValues[7];
+	//CreateTestArray(testValues);
 
-	int testValues[7];
-	CreateTestArray(testValues);
+
+	//Binary Search Tree
+	
+	/*
 	TestInsert(testValues);
 	
 
@@ -44,12 +63,35 @@ int main(){
 
 	//Testing Predecessor and Successor
 	testSuccPre(test);
+											
+											  
+	//Hash Table
+	HTestInsert(testValues);
+	
+	//Testing = and passing
+	cout << "TH=:" << endl;
+	HashTable Htest = CreateHashTable(testValues, 7);
+	Htest.PrintTable();
+	cout << endl << endl;
+	
+	cout << "THpass:" << endl;
+	HTestPass(Htest);
+	Htest.PrintTable();
+	cout << endl << endl;
+
+	HtestSearch(Htest);
+
+												 */ 
 
 
-	*/
+	/*                      Trials              */
+	
+
 	int arrRandomNums[250];
 	CreateListRandomInts(arrRandomNums);
 
+	/*
+	//BST Trials
 	BST fifty = CreateTree(50, arrRandomNums);
 	BST onefifty = CreateTree(150, arrRandomNums);
 	BST twofifty = CreateTree(250, arrRandomNums);
@@ -57,8 +99,28 @@ int main(){
 	BSTTrial(fifty);
 	BSTTrial(onefifty);
 	BSTTrial(twofifty);
+	
+	*/
 
+	//Hash Table Trials
+	HashTable hfifty = CreateHashTable(50, arrRandomNums);
+	HashTable honefifty = CreateHashTable(150, arrRandomNums);
+	HashTable htwofifty = CreateHashTable(250, arrRandomNums);
 
+	HashTableTrial(hfifty);
+	HashTableTrial(honefifty);
+	HashTableTrial(htwofifty);
+
+	//Sorted Hash Table Trials
+	HashTable hsfifty = CreateSortedHashTable(50, arrRandomNums);
+	HashTable hsonefifty = CreateSortedHashTable(150, arrRandomNums);
+	HashTable hstwofifty = CreateSortedHashTable(250, arrRandomNums);
+
+	SortedHashTableTrial(hsfifty);
+	SortedHashTableTrial(hsonefifty);
+	SortedHashTableTrial(hstwofifty);
+
+												
 	system("pause");
 	return 0;
 
@@ -162,14 +224,14 @@ void TestInsert(int temp[]) {
 	BST testInsert;
 
 	//Insert a 1 into an empty tree
-	cout << "TI 1:" << endl;
+	cout << "BTI 1:" << endl;
 	testInsert.Insert(1);
 	testInsert.InorderTraverse(testInsert.ReturnRoot());
 	cout << endl << endl;
 
 
 	//Inserting multiple items into the tree
-	cout << "TI 2:" << endl;
+	cout << "BTI 2:" << endl;
 	for (int i = 0; i < 7; i++)
 		testInsert.Insert(temp[i]);
 
@@ -184,42 +246,119 @@ void testPass(BST test) {
 }
 
 void testSearch(BST test) {
-	cout << "S1" << endl;
+	cout << "BS1" << endl;
 	if (test.Search(test.ReturnRoot(), 20))
-		cout << "Was found " << endl << endl;
+		cout << "20 Was found " << endl << endl;
 	else
-		cout << "Was not found" << endl << endl;
+		cout << "20 Was not found" << endl << endl;
 
-	cout << "S2" << endl;
+	cout << "BS2" << endl;
 	if (test.Search(test.ReturnRoot(), 0))
-		cout << "Was found " << endl << endl;
+		cout << "0 Was found " << endl << endl;
 	else
-		cout << "Was not found" << endl << endl;
+		cout << "0 Was not found" << endl << endl;
 	
 	return;
 }
 
 void testSuccPre(BST test) {
-	cout << "PRE1: " << endl;
+	cout << "BPRE1: " << endl;
 	cout << test.ValueofNode(test.FindPredecessor(20));
 	cout << endl << endl;
 
-	cout << "PRE2: " << endl;
+	cout << "BPRE2: " << endl;
 	cout << test.ValueofNode(test.FindPredecessor(50));
+	cout << endl << endl;
+	
+	cout << "BPRE3: " << endl;
+	cout << test.ValueofNode(test.FindPredecessor(80));
 	cout << endl << endl;
 
 	
 	
-	cout << "POST1: " << endl;
+	cout << "BPOST1: " << endl;
 	cout << test.ValueofNode(test.FindSucessor(20));
 	cout << endl << endl;
 
-	cout << "POST2: " << endl;
+	cout << "BPOST2: " << endl;
 	cout << test.ValueofNode(test.FindSucessor(50));
+	cout << endl << endl;
+
+	cout << "BPOST3: " << endl;
+	cout << test.ValueofNode(test.FindSucessor(80));
 	cout << endl << endl;
 
 	return;
 
+}
+
+void HTestInsert(int temp[]) {
+	HashTable test;
+	HashTable testSorted;
+
+	//Insert a 1 into empty tree
+	cout << "HTI 1" << endl;
+	test.Insert(1);
+	test.PrintTable();
+	cout << endl << endl;
+
+
+	//Inserting multiple items into tree
+	cout << "HTI 2" << endl;
+	for (int i = 0; i < 7; i++) {
+		test.Insert(temp[i]);
+	}
+	test.PrintTable();
+	cout << endl << endl;
+
+	cout << "HTI 3" << endl;
+	for (int i = 0; i < 7; i++) {
+		testSorted.InsertSorted(temp[i]);
+	}
+	testSorted.PrintTable();
+	cout << endl << endl;
+
+}
+
+
+HashTable CreateHashTable(int length, int temp[]) {
+	HashTable temphash;
+
+	for (int i = 0; i < length; i++) {
+		temphash.Insert(temp[i]);
+	}
+
+	return temphash;
+}
+
+HashTable CreateSortedHashTable(int length, int temp[]) {
+	HashTable temphash;
+
+	for (int i = 0; i < length; i++) {
+		temphash.InsertSorted(temp[i]);
+	}
+
+	return temphash;
+}
+
+void HTestPass(HashTable test) {
+	return;
+}
+
+void HtestSearch(HashTable test) {
+	cout << "BS1" << endl;
+	if (test.Search(20))
+		cout << "Was found " << endl << endl;
+	else
+		cout << "Was not found" << endl << endl;
+
+	cout << "BS2" << endl;
+	if (test.Search(0))
+		cout << "Was found " << endl << endl;
+	else
+		cout << "Was not found" << endl << endl;
+
+	return;
 }
 
 
@@ -241,13 +380,57 @@ void BSTTrial(BST tree) {
 		int temp = 0;
 		tree.NumComparisons(tree.ReturnRoot(), i + 100, temp);
 		numCompares[i] = temp;
-		cout << numCompares[i] << endl;
+		//cout << numCompares[i] << endl;
 	}
 
 
 	cout << endl << endl;
 	cout << "Binary Search Tree implementation" << endl;
 	cout << "List Size : " << tree.ReturnLength() << endl ;
+	int averageNumProbes = 0;
+	for (int i = 0; i < 400; i++) {
+		averageNumProbes += numCompares[i];
+	}
+	averageNumProbes = averageNumProbes / 400;
+	cout << "Average number of probes : " << averageNumProbes << endl << endl;
+
+	return;
+}
+
+void HashTableTrial(HashTable table) {
+	int numCompares[400];
+
+	for (int i = 0; i < 400; i++) {
+		numCompares[i] = table.numCompares(i + 100);
+		//cout << numCompares[i] << endl;
+	}
+	//table.PrintTable();
+
+	cout << endl << endl;
+	cout << "Unsorted Hash Table Implementation" << endl;
+	cout << "List Size : " << table.ReturnLength() << endl;
+	int averageNumProbes = 0;
+	for (int i = 0; i < 400; i++) {
+		averageNumProbes += numCompares[i];
+	}
+	averageNumProbes = averageNumProbes / 400;
+	cout << "Average number of probes : " << averageNumProbes << endl << endl;
+
+	return;
+}
+
+void SortedHashTableTrial(HashTable table) {
+	int numCompares[400];
+
+	for (int i = 0; i < 400; i++) {
+		numCompares[i] = table.numComparesSorted(i + 100);
+		//cout << numCompares[i] << endl;
+	}
+	//table.PrintTable();
+
+	cout << endl << endl;
+	cout << "Sorted Hash Table Implementation" << endl;
+	cout << "List Size : " << table.ReturnLength() << endl;
 	int averageNumProbes = 0;
 	for (int i = 0; i < 400; i++) {
 		averageNumProbes += numCompares[i];

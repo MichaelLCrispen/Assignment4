@@ -126,10 +126,12 @@ NodePtr BST::FindPredecessor(int item){
 		return FindMax(x->left);
 
 	NodePtr y = x->parent;
-	while (y != NULL && x == y->right) {
+	while (y != NULL && x == y->left) {
 		x = y;
 		y = y->parent;
 	}
+
+
 	return y;
 }
 
