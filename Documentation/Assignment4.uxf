@@ -1,0 +1,61 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>30</x><y>290</y><w>380</w><h>250</h></coordinates><panel_attributes>Linked List
+--
+- head : NodePtr
+- length : int
+--
++LinkedList():
++~LinkedList():
++LinkedList(const LinkedList&amp; otherlinkedlist):
++const LinkedList&amp; operator=(const LinkedList&amp; otherLinkedList):
++Insert(int data):void 
++InsertSorted(int data):void 
++Search(int key):bool 
++NumComparesSorted(int key):int 
++NumCompares(int key):int 
++PrintList():void </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>10</y><w>240</w><h>240</h></coordinates><panel_attributes>Class: Hash Table
+--
+- bucket[10] : LinkedList
+- length : int
+- Hash(int key) : int
+--
++HashTable()
++~HashTable()
++Insert(int key) : void 
++InsertSorted(int key) : void 
++Search(int key) : bool 
++numCompares(int key) : int 
++numComparesSorted(int key) : int 
++PrintTable() : void 
++ReturnLength() : int </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>80</y><w>440</w><h>350</h></coordinates><panel_attributes>_Class: Binary Search Tree_
+--
+-root: NodePtr
+-length: Int
+
+-FindMin(NodePtr node): NodePtr 
+-FindMax(NodePtr node):NodePtr 
+-BurnForest(NodePtr node):void 
+-CreateTree(NodePtr node):void 
+--
++ BST()
++ ~BST()
++BST(const BST &amp; otherBST):
++const BST&amp; operator=(const BST &amp; otherBST):
++InorderTraverse(NodePtr node):void 
++ Insert(int item):void
++Search(NodePtr x, int item):NodePtr 
++FindPredecessor(int item):NodePtr 
++FindSucessor(int item):NodePtr 
++NumComparisons(NodePtr x, int item, int&amp; numComparisons):NodePtr 
++ValueofNode(NodePtr node):int 
++ReturnLength(): int 
++ReturnRoot():NodePtr </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>100</x><y>620</y><w>210</w><h>80</h></coordinates><panel_attributes>_Struct: Node_
+--
++ key : int
++ next : NodePtr</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>560</y><w>210</w><h>190</h></coordinates><panel_attributes>_Struct: Node_
+--
++ key : int
++ left : Node*
++ right: Node*
++ parent Node*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>890</x><y>420</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>300</y><w>180</w><h>120</h></coordinates><panel_attributes>A NodePtr is a typedef 
+For Node*
+bg=black</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>240</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>530</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element></diagram>

@@ -36,13 +36,13 @@ int main(){
 	
 	/*This block is for testing purposes only*/
 	
-	//int testValues[7];
-	//CreateTestArray(testValues);
+	int testValues[7];
+	CreateTestArray(testValues);
 
 
 	//Binary Search Tree
 	
-	/*
+	
 	TestInsert(testValues);
 	
 
@@ -70,7 +70,7 @@ int main(){
 	
 	//Testing = and passing
 	cout << "TH=:" << endl;
-	HashTable Htest = CreateHashTable(testValues, 7);
+	HashTable Htest = CreateHashTable(7,testValues);
 	Htest.PrintTable();
 	cout << endl << endl;
 	
@@ -81,7 +81,7 @@ int main(){
 
 	HtestSearch(Htest);
 
-												 */ 
+												 
 
 
 	/*                      Trials              */
@@ -128,6 +128,11 @@ int main(){
 
 
 void shuffle(int values[], int size) {
+//Narrative: Shuffles around the values in the array values
+//	Pre - condition : values has been filled
+//	Post - condition : values will be an unsorted randomized array of values
+
+
 
 	// Seed our random number generator.
 
@@ -158,6 +163,11 @@ void shuffle(int values[], int size) {
 
 
 void CreateListRandomInts(int arrRandomNums[]) {
+//Narrative: This function creates a list of
+//	Pre - condition : array is created that can hold 250 integers
+//	Post - condition : 250 random unique integers with values between 100 and 500 will be created and placed in the array.
+
+
 	int min = 100;
 	int	max = 500;
 
@@ -322,6 +332,10 @@ void HTestInsert(int temp[]) {
 
 
 HashTable CreateHashTable(int length, int temp[]) {
+//Narrative: This will fill a hash table with values in randArray
+//	Pre - condition : The length of randArray has been determined and randArray has been filled with values.
+//	Post - condition : a Hash Table is returned containing all values in randArray[]
+
 	HashTable temphash;
 
 	for (int i = 0; i < length; i++) {
@@ -332,6 +346,13 @@ HashTable CreateHashTable(int length, int temp[]) {
 }
 
 HashTable CreateSortedHashTable(int length, int temp[]) {
+
+//Narrative: This will fill a hash table with sorted buckets using values in randArray
+//	Pre - condition : The length of randArray has been determined and randArray has been filled with values.
+//	Post - condition : a Sorted Hash Table is returned containing all values in randArray[]
+
+
+
 	HashTable temphash;
 
 	for (int i = 0; i < length; i++) {
@@ -346,23 +367,28 @@ void HTestPass(HashTable test) {
 }
 
 void HtestSearch(HashTable test) {
-	cout << "BS1" << endl;
+	cout << "HS1" << endl;
 	if (test.Search(20))
-		cout << "Was found " << endl << endl;
+		cout << "20 Was found " << endl << endl;
 	else
-		cout << "Was not found" << endl << endl;
+		cout << "20 Was not found" << endl << endl;
 
-	cout << "BS2" << endl;
+	cout << "HS2" << endl;
 	if (test.Search(0))
-		cout << "Was found " << endl << endl;
+		cout << "0 Was found " << endl << endl;
 	else
-		cout << "Was not found" << endl << endl;
+		cout << "0 Was not found" << endl << endl;
 
 	return;
 }
 
 
 BST CreateTree(int length, int arrRandomNums[]) {
+//Narrative: This will fill a binary search tree with the values in randArray.
+//	Pre - condition : The length of randArray has been determined and randArray has been filled with values.
+//	Post - condition : a BST is returned containing all values in randArray[]
+
+
 	BST temp;
 	
 	for (int i = 0; i < length; i++) {
@@ -374,6 +400,15 @@ BST CreateTree(int length, int arrRandomNums[]) {
 
 
 void BSTTrial(BST tree) {
+//Narrative: This runs a trial on the binary tree that is passed into the function.
+//	The trial includes outputting the size of the BST and the average number of probes
+//	it takes to find a value between 100 and 500
+//
+//	Pre - condition : tree is a filled binary search tree
+//	Post - condition : Binary search tree trial requirements(List size and Average number of probes) will be output to the screen.
+
+
+
 	int numCompares[400];
 
 	for (int i = 0; i < 400; i++) {
@@ -397,7 +432,14 @@ void BSTTrial(BST tree) {
 	return;
 }
 
+
 void HashTableTrial(HashTable table) {
+//	Narrative:	This runs a trial on the HashTable that is passed into the function.
+//				The trial includes outputting the size of the HashTable and the average number
+//				of probes it takes to find a value between 100 and 500
+//	Pre - condition : table is a filled hash table
+//	Post - condition : Hash Table trial requirements(List size and Average number of probes) will be output to the screen.
+
 	int numCompares[400];
 
 	for (int i = 0; i < 400; i++) {
@@ -419,7 +461,15 @@ void HashTableTrial(HashTable table) {
 	return;
 }
 
+
 void SortedHashTableTrial(HashTable table) {
+	//Narrative: This runs a trial on the sorted HashTable that is passed into the function.
+//			 The trial includes outputting the size of the sorted HashTable and the average
+//			 number of probes it takes to find a value between 100 and 500
+//	Pre - condition : table is a filled sorted hash table
+//	Post - condition : Sorted Hash Table trial requirements(List size and Average number of probes) will be output to the screen.
+
+
 	int numCompares[400];
 
 	for (int i = 0; i < 400; i++) {
